@@ -1,5 +1,5 @@
 const db = require("./db");
-async function registrarUsuario(nick){
+async function registrarUsuario(nick) {
     return await db.insertOne("usuario",{"nick": nick});
 }
 
