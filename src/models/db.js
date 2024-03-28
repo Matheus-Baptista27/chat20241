@@ -17,4 +17,4 @@ let updateOne= async (collection, object, param)=>{
     return result;
   }
   
-  module.exports = {findAll, findOne, updateOne}
+  module.exports = {findAll, findOne, updateOne};

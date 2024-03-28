@@ -12,6 +12,7 @@ exports.entrar= async (iduser,idsala)=>{
     }
     return false;
 }
+
 exports.enviarMensagem= async (nick, msg, idsala)=>{
     const sala = await salaModel.buscarSala(idsala);
       if(!sala.msgs){
