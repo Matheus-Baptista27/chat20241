@@ -45,9 +45,14 @@ exports.buscarMensagens = async (idsala, timestamp)=>{
         };
 } 
 
-exports.sair= async (iduser,idsala)=>{
-  const sala = await salaModel.sairSala(idsala);
-  let usuarioModel=require('../models/salaModel');
-}
+exports.sair = async (iduser, idsala) => {
+  const sairSalaResult = await salaModel.sairSala(idsala);
+  
+  if (sairSalaResult) {
+    return { msg: "Usuário saiu da sala com sucesso." };
+  } else {
+    return { msg: "Falha ao sair da sala." };
+  }
+};
       
   

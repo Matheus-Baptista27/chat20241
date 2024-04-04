@@ -26,4 +26,28 @@ let buscarMensagens = async (idsala, timestamp)=>{
     return [];
 }
 
-  module.exports = { listarSalas,buscarMensagens, buscarSala, atualizarMensagens};
+async function sairSala(idsala) {
+  try {
+    
+    let sala = await db.findOne("salas", idsala);
+
+    if (!sala) {
+ 
+      return false;
+    }
+    sala.participantes = sala.participantes.filter((participante) => participante !== iduser);
+
+ 
+    await db.updateOne("salas", sala, { _id: sala._id });
+
+ 
+    return true;
+  } catch (error) {
+   
+    console.error("Erro ao sair da sala:", error);
+    return false;
+  }
+}
+
+
+  module.exports = { listarSalas,buscarMensagens, buscarSala, atualizarMensagens, sairSala};

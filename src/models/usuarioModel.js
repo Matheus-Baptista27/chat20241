@@ -13,4 +13,22 @@ let alterarUsuario = async (user)=>{
   return await db.updateOne("usuarios", user,{_id:user._id});
 }
 
-module.exports = {registrarUsuario, buscarUsuario, alterarUsuario};
+async function sairDaSala(idUser) 
+  try {
+      let user = await db.findOne("usuarios", idUser);
+      
+      if (!user) {
+          console.error("Usuário não encontrado.");
+          return false;
+      
+      user.salaAtual = null;
+      await db.updateOne("usuarios", user, { _id: user._id });
+
+      return true;
+  } catch (error) {
+      console.error("Erro ao sair da sala:", error);
+      return false;
+  }
+}
+
+module.exports = {registrarUsuario, buscarUsuario, alterarUsuario}

@@ -62,7 +62,7 @@ app.use("/sala/mensagens/", router.get("/sala/mensagens", async (req, res) => {
 
 app.use("/sala/sair", router.put("/sala/sair", async (req, res, next)=>{
   if(!token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) 
-  return false;
+    return false;
 
   let resp= await salaController.sair(req.headers.iduser, req.query.idsala);
   res.status(200).send(resp);
