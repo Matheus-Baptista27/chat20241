@@ -3,10 +3,6 @@ async function listarSalas(){
     return await db.findAll("salas");
 }
 
-let listarSalas = async ()=>{
-    let salas= await db.findAll("salas");
-    return salas;
-};
 
 let buscarSala = async (idsala)=>{
     return db.findOne("salas",idsala);

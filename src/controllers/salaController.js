@@ -1,3 +1,9 @@
+const salaModel = require("../models/salaModel");
+
+exports.get=async()=>{
+  return await salaModel.listarSalas();
+}
+
 exports.get= async (req, res) => {
     return await salaModel.listarSalas();
   }
@@ -14,6 +20,7 @@ exports.entrar= async (iduser,idsala)=>{
 }
 
 exports.enviarMensagem= async (nick, msg, idsala)=>{
+    let salaModel=require('../models/salaModel');
     const sala = await salaModel.buscarSala(idsala);
       if(!sala.msgs){
         sala.msgs=[];
@@ -37,5 +44,10 @@ exports.buscarMensagens = async (idsala, timestamp)=>{
           "msgs":mensagens
         };
 } 
+
+exports.sair= async (iduser,idsala)=>{
+  const sala = await salaModel.sairSala(idsala);
+  let usuarioModel=require('../models/salaModel');
+}
       
   
