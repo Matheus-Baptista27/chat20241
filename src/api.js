@@ -64,7 +64,7 @@ app.use("/sala/mensagens/", router.get("/sala/mensagens", async (req, res) => {
 }))
 
 // sair da sala
-app.use("/sala/sair", router.put("/sala/sair", async (req, res) => {
+app.use("/sala/sair/", router.put("/sala/sair", async (req, res) => {
   if(!token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) 
   return false;
   let resp= await salaController.sair(req.headers.iduser);

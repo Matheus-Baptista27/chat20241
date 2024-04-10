@@ -36,4 +36,9 @@ let updateOne= async (collection, object, param)=>{
     return result;
   }
   
-  module.exports = {insertOne, findAll, findOne, updateOne};
+  let deleteOne = async (collection, param) => {
+    const db = await connect();
+    let result = await db.collection(collection).deleteOne(param);
+    return result;
+  }
+  module.exports = {insertOne, findAll, findOne, updateOne, deleteOne};

@@ -1,4 +1,5 @@
 const salaModel = require("../models/salaModel");
+const usuarioModel = require('../models/usuarioModel');
 
 exports.get=async()=>{
   return await salaModel.listarSalas();
@@ -12,6 +13,9 @@ exports.entrar= async (iduser,idsala)=>{
     const sala = await salaModel.buscarSala(idsala);
     let usuarioModel=require('../models/usuarioModel');
     let user= await usuarioModel.buscarUsuario(iduser);
+
+    console.log(sala);
+    
     user.sala={_id:sala._id, nome:sala.nome, tipo:sala.tipo};
     if(await usuarioModel.alterarUsuario(user)){
       return {msg:"OK", timestamp:timestamp=Date.now()};
@@ -45,8 +49,8 @@ exports.buscarMensagens = async (idsala, timestamp)=>{
         };
 } 
 
-const salaModel = require("../models/salaModel");
-const usuarioModel = require('../models/usuarioModel');
+//const salaModel = require("../models/salaModel");
+
 
 exports.get= async (req, res) => {
     return await salaModel.listarSalas();

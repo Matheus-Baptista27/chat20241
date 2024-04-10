@@ -1,9 +1,14 @@
-//let buscarSala = async (idsala)=>{
-  //  return db.findOne("salas",idsala);
-//}//
+let buscarSala = async (idsala)=>{
+   return db.findOne("salas",idsala);
+}
 
 const db = require("./db");
 const { ObjectId } = require('mongodb');
+
+let listarSalas = async ()=>{
+  let salas= await db.findAll("salas");
+  return salas;
+};
 
 let atualizarMensagens=async (sala)=>{
     return await db.updateOne("salas", sala,{_id:sala._id});
