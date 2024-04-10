@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
+
+const token = require("./util/token");
+const salaController = require("./controllers/salaController");
+const usuarioController = require("./controllers/usuarioController.js");
+
 app.use(express.urlencoded({extended : true }));
 app.use(express.json());
 
-const token = require('./util/token');
-const salaController = require('./controllers/salaController');
 const router = express.Router();
 
 app.use(`/`, router.get(`/`, (req, res)=>{
@@ -60,13 +63,20 @@ app.use("/sala/mensagens/", router.get("/sala/mensagens", async (req, res) => {
   res.status(200).send(resp);
 }))
 
-app.use("/sala/sair", router.put("/sala/sair", async (req, res, next)=>{
+// sair da sala
+app.use("/sala/sair", router.put("/sala/sair", async (req, res) => {
   if(!token.checkToken(req.headers.token,req.headers.iduser,req.headers.nick)) 
-    return false;
-
-  let resp= await salaController.sair(req.headers.iduser, req.query.idsala);
+  return false;
+  let resp= await salaController.sair(req.headers.iduser);
   res.status(200).send(resp);
 }))
 
+// sair Usuario
+app.use("/sair-user", router.post("/sair-user", async (req, res) => {
+  if(!token.checkToken(req.headers.token,req.headers.idUser,req.headers.nick)) 
+  return false;
+  let resp= await salaController.sairUser(req.query.idUser);
+  res.status(200).send(resp);
+}))
 
 module.exports = {app};
